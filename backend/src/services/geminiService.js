@@ -118,8 +118,14 @@ const analysisValidator = z.object({
 });
 
 function buildPrompt({ rawText, targetRole }) {
+  const date = `${new Date().getMonth()} ${new Date().getFullYear()}`;
+
   return [
     "You are a senior technical recruiter and ATS expert reviewing a resume.",
+    `Current Date: ${date}`,
+    "Do not flag dates as future dates unless they occur after the current date.",
+    "Use this date when evaluating employment timelines.",
+    "",
     targetRole
       ? `Target Role: ${targetRole}.`
       : "No specific target role was provided - assess for the role the candidate appears to be aiming for",
